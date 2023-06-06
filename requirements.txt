@@ -18,3 +18,5 @@ Pillow==9.5.0
 sqlparse==0.4.4
 typing_extensions==4.6.3
 yarl==1.9.2
+django-heroku==0.3.1
+
