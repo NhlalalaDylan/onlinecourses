@@ -101,16 +101,9 @@ class Enrollment(models.Model):
 
                 
 class Question(models.Model):
-    # One-To-Many relationship to Course
     courses = models.ManyToManyField(Course)
-    # Foreign key to lesson (REMOVED as I wanted to relate questions directly with courses, see task caption)
-    # lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=False)
-    # question text
     question_text = models.CharField(max_length=500, default="This is a sample question.")
-    # question grade/mark
     marks = models.FloatField(default=1.0)
-
-    # A model method to calculate if learner scored points by answering correctly
     def answered_correctly(self, selected_ids):
        all_answers = self.choice_set.filter(is_correct=True).count()
        selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
@@ -124,11 +117,8 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
-    # One-To-Many relationship with Question
     question = models.ForeignKey(Question, models.SET_NULL, null=True)
-    # Choice content / text
     choice_text = models.CharField(null=False, max_length=50)
-    # Indicates whether the choice is correct or not
     is_correct = models.BooleanField(default=True)
 
     def __str__(self):
@@ -136,11 +126,8 @@ class Choice(models.Model):
 
 
 class Submission(models.Model):
-    # One enrollment could have multiple submission
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
-    # Many-to-Many relationship with choices
     choices = models.ManyToManyField(Choice)
-    # Time and date metadata
     date_submitted  = models.DateField(default=now, editable=False)  
     time = models.TimeField(default=now, editable=False)
 
