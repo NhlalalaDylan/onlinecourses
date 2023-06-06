@@ -21,7 +21,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['title', 'content']
-    # inlines = [QuestionInline] 
+
 
 
 class EnrollmentAdmin(admin.ModelAdmin):
