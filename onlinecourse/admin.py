@@ -2,14 +2,6 @@ from django.contrib import admin
 from .models import Course, Lesson, Instructor, Learner
 from .models import Question, Choice, Submission, Enrollment
 
-# Removed QuestionInline as it is no longer needed, 
-# because I wanted the questions to be related directly to courses, not to lessons
-# Leaving it here for grading purposes
-# class QuestionInline(admin.StackedInline):
-#     model = Question
-#     extra = 1
-
-
 class ChoiceInline(admin.StackedInline):
     model = Choice
     extra = 2
@@ -36,13 +28,11 @@ class EnrollmentAdmin(admin.ModelAdmin):
     list_display = ['user', 'course', 'date_enrolled', 'mode', 'rating']
 
 
-# Question and Choice models
+
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ['question_text']
     inlines = [ChoiceInline]
 
-
-# Registering models for admin site
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Instructor)
