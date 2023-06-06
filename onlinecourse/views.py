@@ -167,7 +167,6 @@ def show_exam_result(request, course_id, submission_id):
         if question.answered_correctly(submission_choices):
             submission_score += question.marks
         
-    # Determine a grade (points are % correct, rounded to nearest whole integer)
     context['grade'] = round(submission_score / max_score * 100)
     print("Submission grade: ", submission_score)
 
